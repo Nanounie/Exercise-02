@@ -43,3 +43,37 @@ Nur die besten 10 Punktzahlen werden gespeichert und angezeigt.
 
 6. Refactoring
 Bei Umsetzung sollten die Funktionen ausgelagert werden, für eine bessere Übersicht und Trennung zu dem normalen Snake Spiel.
+
+
+Spezifikation für das Hindernis-System im Snake-Spiel
+1.Ziel der Erweiterung
+Das Hindernis-System fügt Hindernisse zum Snake-Spiel hinzu, die das Spielfeld blockieren und die Schlange daran hindern, diese zu durchqueren. Wenn die Schlange mit einem Hindernis kollidiert, endet das Spiel. Das Spiel soll dadurch schwieriger und herausfordernder werden.
+
+2.Datenstruktur
+Die Hindernisse werden, wie beim Apfel mit x und y Werten initialisiert und mit einem roten Rechteck dargestellt.
+
+3.Benötigte Funktionen des Systems
+Hindernis Initialisieren:
+Es werden beim Start des Spiels eine feste Anzahl von Hindernissen auf dem Spielfeld erzeugt (MAX_OBSTACELS).
+Die Hindernisse werden in einem Array obstacle_x, obstacle_y gespeichert, und jede Position wird als Punkt gespeichert.
+
+Hindernis Zeichnen (doDrawing):
+Diese Funktion zeichnet alle Hindernisse auf dem Spielfeld vgl. Apfel.
+Es wird ein rotes Quadrat verwendet, um ein Hindernis darzustellen. Beim Neustart des Spiels werden die Hindernisse neu generiert.
+
+Kollision mit Hindernissen Überprüfen (checkObstacleCollision):
+Diese Funktion überprüft, ob die Schlange mit einem der Hindernisse kollidiert.
+Wenn der Kopf der Schlange mit einem Hindernis kollidiert, endet das Spiel.
+
+Hindernisse Lokalisieren (locateObstacles):
+Diese Funktion wählt zufällig Positionen für die Hindernisse aus. Dabei wird sichergestellt, dass keine Hindernisse auf der Schlange oder auf dem Apfel platziert werden vgl. Apfel.
+
+4.Benutzeroberfläche
+Nach jedem Frame wird die Methode doDrawing(?) aufgerufen, um die Hindernisse an ihren Positionen auf dem Spielfeld anzuzeigen.
+Hindernisse werden als rote Rechtecke  dargestellt.
+
+5.Mögliche auftretende Fehler
+Ob die Schlange nicht durch die Hindernisse hindurchgehen kann.
+
+6.Refactorings
+Man könnte die Funktionen auslagern.
