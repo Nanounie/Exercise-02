@@ -24,6 +24,8 @@ public class Board extends JPanel implements ActionListener {
     private final int initial_snake_size = 3;
     private final int RAND_POS = 29;
     private final int game_loop_duration_in_ms = 140;
+    private final int MAX_OBSTACLES = 5; // Maximalzahl der Hindernisse
+
 
     private final int x[] = new int[maximum_snake_length];
     private final int y[] = new int[maximum_snake_length];
@@ -34,6 +36,9 @@ public class Board extends JPanel implements ActionListener {
     private int superFruit_x;
     private int superFruit_y;
     private boolean superFruitExist = false;
+
+    private int[] obstacle_x = new int[MAX_OBSTACLES];
+    private int[] obstacle_y = new int[MAX_OBSTACLES];
 
     private boolean leftDirection = false;
     private boolean rightDirection = true;
@@ -85,6 +90,7 @@ public class Board extends JPanel implements ActionListener {
         
         locateApple();
         locateSuperFruit(); // Superfrucht initialisieren
+        locateObstacles(); // Hindernisse initialisieren
 
 
         //timer = new Timer(game_loop_duration_in_ms, this);
@@ -111,6 +117,12 @@ public class Board extends JPanel implements ActionListener {
         if (inGame) {
 
             g.drawImage(apple, apple_x, apple_y, this);
+
+            // Zeichne die Hindernisse
+            g.setColor(Color.red); // Farbe für Hindernisse
+            for (int i = 0; i < MAX_OBSTACLES; i++) {
+                g.fillRect(obstacle_x[i], obstacle_y[i], title_size_in_pixels, title_size_in_pixels);
+            }
 
             if (superFruitExist) {
                 g.setColor(Color.cyan); // Farbe f체r Superfrucht
@@ -158,6 +170,14 @@ public class Board extends JPanel implements ActionListener {
             current_snake_Size += 3; // Die Schlange w채chst um 3
             superFruitExist = false; // Superfrucht ist gegessen
             locateSuperFruit(); // Eine neue Superfrucht wird platziert
+        }
+    }
+
+    private void checkObstacleCollision() {
+        for (int i = 0; i < MAX_OBSTACLES; i++) {
+            if (x[0] == obstacle_x[i] && y[0] == obstacle_y[i]) {
+                inGame = false; // Wenn ein Hindernis getroffen wird, endet das Spiel
+            }
         }
     }
 
@@ -234,6 +254,17 @@ public class Board extends JPanel implements ActionListener {
         superFruitExist = true; // Superfrucht erscheint
     }
 
+    private void locateObstacles() {
+        for (int i = 0; i < MAX_OBSTACLES; i++) {
+            int r = (int) (Math.random() * RAND_POS);
+            obstacle_x[i] = r * title_size_in_pixels;
+
+            r = (int) (Math.random() * RAND_POS);
+            obstacle_y[i] = r * title_size_in_pixels;
+        }
+    }
+
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -242,6 +273,7 @@ public class Board extends JPanel implements ActionListener {
             checkApple();
             checkSuperFruit(); // Superfrucht überprüfen
             checkCollision();
+            checkObstacleCollision(); 
             move();
         }
 
