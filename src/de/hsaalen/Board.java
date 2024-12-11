@@ -192,10 +192,9 @@ public class Board extends JPanel implements ActionListener {
 
     private void move() {
 
-        for (int z = current_snake_Size; z > 0; z--) {
-            x[z] = x[(z - 1)];
-            y[z] = y[(z - 1)];
-        }
+        System.arraycopy(x, 0, x, 1, current_snake_Size - 1);
+        System.arraycopy(y, 0, y, 1, current_snake_Size - 1);
+   
 
         if (leftDirection) {
             x[0] -= title_size_in_pixels;
