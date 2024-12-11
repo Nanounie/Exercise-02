@@ -15,4 +15,7 @@ TestRunner.class
 Resource folder wo png dateien drinn sind
 Unittests folder 
 
-TODO: Refractoring 
+TODO: Refractoring (Generelle Vorgehensweise beim Refractoring: 
+1. teste den alten code
+2. führe das refractoring durch 
+3. teste den refractorten code erneut 
