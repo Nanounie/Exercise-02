@@ -1,0 +1,11 @@
+Overview of the existing structure. Which files do exisit and how are they named.
+
+1.Board.java
+2.BoardTest.java
+3.Snake.java
+4.TestRunner.java
+
+Board.class
+BoardTest.class
+Snake.class
+TestRunner.class
