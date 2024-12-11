@@ -71,12 +71,21 @@ public class Board extends JPanel implements ActionListener {
 
         ImageIcon iid = new ImageIcon("src/resources/dot.png");
         ball = iid.getImage();
+        if (ball == null) {
+            System.out.println("Fehler: Bild konnte nicht geladen werden.");
+        }
 
         ImageIcon iia = new ImageIcon("src/resources/apple.png");
         apple = iia.getImage();
+        if (apple == null) {
+            System.out.println("Fehler: Bild konnte nicht geladen werden.");
+        }
 
         ImageIcon iih = new ImageIcon("src/resources/head.png");
         head = iih.getImage();
+        if (head == null) {
+            System.out.println("Fehler: Bild konnte nicht geladen werden.");
+        }
     }
 
     private void initGame() {
