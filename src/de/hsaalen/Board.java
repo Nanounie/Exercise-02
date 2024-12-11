@@ -215,29 +215,18 @@ public class Board extends JPanel implements ActionListener {
 
     private void checkCollision() {
 
-        for (int z = current_snake_Size; z > 0; z--) {
-
-            if ((z > 4) && (x[0] == x[z]) && (y[0] == y[z])) {
+        for (int z = 4; z < current_snake_Size; z++) {
+            if (x[0] == x[z] && y[0] == y[z]) {
                 inGame = false;
+                break; 
             }
         }
 
-        if (y[0] >= height_in_pixels) {
+        if (x[0] < 0  x[0] >= width_in_pixels  y[0] < 0 || y[0] >= height_in_pixels) 
+        {
             inGame = false;
         }
 
-        if (y[0] < 0) {
-            inGame = false;
-        }
-
-        if (x[0] >= width_in_pixels) {
-            inGame = false;
-        }
-
-        if (x[0] < 0) {
-            inGame = false;
-        }
-        
         if (!inGame) {
             timer.stop();
         }
