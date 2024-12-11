@@ -5,4 +5,3 @@ https://zetcode.com/javagames/snake/
 
 ![Snake game screenshot](snake.png)
 
-Das ist ein test
