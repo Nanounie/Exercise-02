@@ -1,5 +1,7 @@
 Overview of the existing structure. Which files do exisit and how are they named.
 
+4 Unterverzeichnisse
+
 1.Board.java
 2.BoardTest.java
 3.Snake.java
@@ -9,3 +11,8 @@ Board.class
 BoardTest.class
 Snake.class
 TestRunner.class
+
+Resource folder wo png dateien drinn sind
+Unittests folder 
+
+TODO: Refractoring 
