@@ -121,12 +121,12 @@ public class Board extends JPanel implements ActionListener {
             // Zeichne die Hindernisse
             g.setColor(Color.red); // Farbe für Hindernisse
             for (int i = 0; i < MAX_OBSTACLES; i++) {
-                g.fillRect(obstacle_x[i], obstacle_y[i], title_size_in_pixels, title_size_in_pixels);
+                g.fillOval(obstacle_x[i], obstacle_y[i], title_size_in_pixels, title_size_in_pixels);
             }
 
             if (superFruitExist) {
                 g.setColor(Color.cyan); // Farbe f체r Superfrucht
-                g.fillRect(superFruit_x, superFruit_y, title_size_in_pixels, title_size_in_pixels);
+                g.fillOval(superFruit_x, superFruit_y, title_size_in_pixels, title_size_in_pixels);
             }
 
             for (int z = 0; z < current_snake_Size; z++) {
