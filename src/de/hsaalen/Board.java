@@ -296,28 +296,41 @@ public class Board extends JPanel implements ActionListener {
 
             int key = e.getKeyCode();
 
-            if ((key == KeyEvent.VK_LEFT) && (!rightDirection)) {
-                leftDirection = true;
-                upDirection = false;
-                downDirection = false;
-            }
-
-            if ((key == KeyEvent.VK_RIGHT) && (!leftDirection)) {
-                rightDirection = true;
-                upDirection = false;
-                downDirection = false;
-            }
-
-            if ((key == KeyEvent.VK_UP) && (!downDirection)) {
-                upDirection = true;
-                rightDirection = false;
-                leftDirection = false;
-            }
-
-            if ((key == KeyEvent.VK_DOWN) && (!upDirection)) {
-                downDirection = true;
-                rightDirection = false;
-                leftDirection = false;
+            switch (key) {
+                case KeyEvent.VK_LEFT:
+                    if (!rightDirection) {
+                        leftDirection = true;
+                        upDirection = false;
+                        downDirection = false;
+                    }
+                    break;
+        
+                case KeyEvent.VK_RIGHT:
+                    if (!leftDirection) {
+                        rightDirection = true;
+                        upDirection = false;
+                        downDirection = false;
+                    }
+                    break;
+        
+                case KeyEvent.VK_UP:
+                    if (!downDirection) {
+                        upDirection = true;
+                        rightDirection = false;
+                        leftDirection = false;
+                    }
+                    break;
+        
+                case KeyEvent.VK_DOWN:
+                    if (!upDirection) {
+                        downDirection = true;
+                        rightDirection = false;
+                        leftDirection = false;
+                    }
+                    break;
+        
+                default:
+                    break;
             }
         }
     }
