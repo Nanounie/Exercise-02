@@ -82,6 +82,15 @@ public class Board extends JPanel implements ActionListener {
         
         locateApple();
 
+
+        //timer = new Timer(game_loop_duration_in_ms, this);
+        //timer.start();
+
+        start_game_loop_timer();
+    }
+
+    public void start_game_loop_timer()
+    {
         timer = new Timer(game_loop_duration_in_ms, this);
         timer.start();
     }
