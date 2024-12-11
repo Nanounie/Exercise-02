@@ -31,6 +31,9 @@ public class Board extends JPanel implements ActionListener {
     private int current_snake_Size;
     private int apple_x;
     private int apple_y;
+    private int superFruit_x;
+    private int superFruit_y;
+    private boolean superFruitExist = false;
 
     private boolean leftDirection = false;
     private boolean rightDirection = true;
@@ -44,7 +47,7 @@ public class Board extends JPanel implements ActionListener {
     private Image head;
 
     public Board() {
-        
+
         initBoard();
     }
     
@@ -81,6 +84,7 @@ public class Board extends JPanel implements ActionListener {
         }
         
         locateApple();
+        locateSuperFruit(); // Superfrucht initialisieren
 
 
         //timer = new Timer(game_loop_duration_in_ms, this);
@@ -107,6 +111,11 @@ public class Board extends JPanel implements ActionListener {
         if (inGame) {
 
             g.drawImage(apple, apple_x, apple_y, this);
+
+            if (superFruitExist) {
+                g.setColor(Color.cyan); // Farbe f체r Superfrucht
+                g.fillRect(superFruit_x, superFruit_y, title_size_in_pixels, title_size_in_pixels);
+            }
 
             for (int z = 0; z < current_snake_Size; z++) {
                 if (z == 0) {
@@ -141,6 +150,14 @@ public class Board extends JPanel implements ActionListener {
 
          current_snake_Size++;
             locateApple();
+        }
+    }
+
+    private void checkSuperFruit() {
+        if (x[0] == superFruit_x && y[0] == superFruit_y) {
+            current_snake_Size += 3; // Die Schlange w채chst um 3
+            superFruitExist = false; // Superfrucht ist gegessen
+            locateSuperFruit(); // Eine neue Superfrucht wird platziert
         }
     }
 
@@ -207,12 +224,23 @@ public class Board extends JPanel implements ActionListener {
         apple_y = ((r * title_size_in_pixels));
     }
 
+    private void locateSuperFruit() {
+        int r = (int) (Math.random() * RAND_POS);
+        superFruit_x = r * title_size_in_pixels;
+
+        r = (int) (Math.random() * RAND_POS);
+        superFruit_y = r * title_size_in_pixels;
+
+        superFruitExist = true; // Superfrucht erscheint
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
         if (inGame) {
 
             checkApple();
+            checkSuperFruit(); // Superfrucht überprüfen
             checkCollision();
             move();
         }
