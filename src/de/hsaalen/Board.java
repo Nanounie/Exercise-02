@@ -17,17 +17,18 @@ import javax.swing.Timer;
 
 public class Board extends JPanel implements ActionListener {
 
-    private final int B_WIDTH = 300;
-    private final int B_HEIGHT = 300;
-    private final int DOT_SIZE = 10;
-    private final int ALL_DOTS = 900;
+    private final int width_in_pixels = 300;
+    private final int height_in_pixels = 300;
+    private final int title_size_in_pixels = 10;
+    private final int maximum_snake_length = 900;
+    private final int initial_snake_size = 3;
     private final int RAND_POS = 29;
-    private final int DELAY = 140;
+    private final int game_loop_duration_in_ms = 140;
 
-    private final int x[] = new int[ALL_DOTS];
-    private final int y[] = new int[ALL_DOTS];
+    private final int x[] = new int[maximum_snake_length];
+    private final int y[] = new int[maximum_snake_length];
 
-    private int dots;
+    private int current_snake_Size;
     private int apple_x;
     private int apple_y;
 
@@ -53,7 +54,7 @@ public class Board extends JPanel implements ActionListener {
         setBackground(Color.black);
         setFocusable(true);
 
-        setPreferredSize(new Dimension(B_WIDTH, B_HEIGHT));
+        setPreferredSize(new Dimension(width_in_pixels, height_in_pixels));
         loadImages();
         initGame();
     }
@@ -72,16 +73,16 @@ public class Board extends JPanel implements ActionListener {
 
     private void initGame() {
 
-        dots = 3;
+        current_snake_Size = 3;
 
-        for (int z = 0; z < dots; z++) {
+        for (int z = 0; z < current_snake_Size; z++) {
             x[z] = 50 - z * 10;
             y[z] = 50;
         }
         
         locateApple();
 
-        timer = new Timer(DELAY, this);
+        timer = new Timer(game_loop_duration_in_ms, this);
         timer.start();
     }
 
@@ -98,7 +99,7 @@ public class Board extends JPanel implements ActionListener {
 
             g.drawImage(apple, apple_x, apple_y, this);
 
-            for (int z = 0; z < dots; z++) {
+            for (int z = 0; z < current_snake_Size; z++) {
                 if (z == 0) {
                     g.drawImage(head, x[z], y[z], this);
                 } else {
@@ -122,52 +123,52 @@ public class Board extends JPanel implements ActionListener {
 
         g.setColor(Color.white);
         g.setFont(small);
-        g.drawString(msg, (B_WIDTH - metr.stringWidth(msg)) / 2, B_HEIGHT / 2);
+        g.drawString(msg, (width_in_pixels - metr.stringWidth(msg)) / 2, height_in_pixels / 2);
     }
 
     private void checkApple() {
 
         if ((x[0] == apple_x) && (y[0] == apple_y)) {
 
-            dots++;
+         current_snake_Size++;
             locateApple();
         }
     }
 
     private void move() {
 
-        for (int z = dots; z > 0; z--) {
+        for (int z = current_snake_Size; z > 0; z--) {
             x[z] = x[(z - 1)];
             y[z] = y[(z - 1)];
         }
 
         if (leftDirection) {
-            x[0] -= DOT_SIZE;
+            x[0] -= title_size_in_pixels;
         }
 
         if (rightDirection) {
-            x[0] += DOT_SIZE;
+            x[0] += title_size_in_pixels;
         }
 
         if (upDirection) {
-            y[0] -= DOT_SIZE;
+            y[0] -= title_size_in_pixels;
         }
 
         if (downDirection) {
-            y[0] += DOT_SIZE;
+            y[0] += title_size_in_pixels;
         }
     }
 
     private void checkCollision() {
 
-        for (int z = dots; z > 0; z--) {
+        for (int z = current_snake_Size; z > 0; z--) {
 
             if ((z > 4) && (x[0] == x[z]) && (y[0] == y[z])) {
                 inGame = false;
             }
         }
 
-        if (y[0] >= B_HEIGHT) {
+        if (y[0] >= height_in_pixels) {
             inGame = false;
         }
 
@@ -175,7 +176,7 @@ public class Board extends JPanel implements ActionListener {
             inGame = false;
         }
 
-        if (x[0] >= B_WIDTH) {
+        if (x[0] >= width_in_pixels) {
             inGame = false;
         }
 
@@ -191,10 +192,10 @@ public class Board extends JPanel implements ActionListener {
     private void locateApple() {
 
         int r = (int) (Math.random() * RAND_POS);
-        apple_x = ((r * DOT_SIZE));
+        apple_x = ((r * title_size_in_pixels));
 
         r = (int) (Math.random() * RAND_POS);
-        apple_y = ((r * DOT_SIZE));
+        apple_y = ((r * title_size_in_pixels));
     }
 
     @Override
